@@ -15,7 +15,10 @@ describe('Testig al componente prueba', () => {
         const tem = await findByRole('heading');
 
         expect(tem).toHaveTextContent("10");
-    })
+    });
+
+    
+    
     
 })
 

@@ -2,25 +2,37 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CityInfo from '../CityInfo';
 import Weather from '../Weather';
+import Grid from '@material-ui/core/Grid';
 
 
-
-const renderCityAndCountry = (cityandcountry) =>{
+//renderCityAndCountry se va a convertir en una funcion que retorna otra funcion
+const renderCityAndCountry = eventoOnClick =>  (cityandcountry) =>{
     const {city, country} = cityandcountry;
 
-    return (
-     <li key = {city}>
-         <Weather temperature={"10"} weather="fog"/>
-         <CityInfo city ={city} country={country} />
-     </li>   
-    )
-}
+        return (
+        <li key = {city} onClick={eventoOnClick}>
+            <Grid  container justify="center" alignItems="center">
 
-const CityList = ({cities}) => {
+                <Grid item xs={12}sm={8} >
+                    <CityInfo city ={city} country={country} />
+
+                </Grid>
+                
+                <Grid  item xs={12}sm={4} container justify="center">
+
+                    <Weather temperature={"10"} weather="fog"/>
+                </Grid>
+
+
+            </Grid>
+        </li>   
+        )
+}
+const CityList = ({cities, onClickCity}) => {
     return (
         <ul>
             {
-                cities.map((city,i) => renderCityAndCountry(city))
+                cities.map((city,i) => renderCityAndCountry(onClickCity)(city))
             } 
         </ul>
     )
@@ -28,6 +40,7 @@ const CityList = ({cities}) => {
 
 CityList.propTypes = {
     cities: PropTypes.array.isRequired, //ptar
+    //onClickCity:PropTypes.func.isRequired,//ptfr
 }
 
 export default CityList
