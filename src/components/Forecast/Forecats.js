@@ -6,9 +6,9 @@ import ForecastItem from '../ForecastItem';
 //Funcion renderizadora
 const renderForecastItem = (forecast) => {
     const {weekDay, hour, state, temperature} = forecast;
-
+    console.log(weekDay);
     return (
-        <Grid data-testId = "forecast-item" item key={`${weekDay}${hour}`}>
+        <Grid data-testid="forecast-item" item key={`${weekDay}${hour}`}>
             <ForecastItem hour={hour} weekDay={weekDay} state={state} temperature={temperature}/>
         </Grid>
     )
@@ -20,7 +20,7 @@ const Forecats = ({forecastItemList}) => {
     return (
         <Grid
             container
-            justify="center"
+            justify="space-around"
             alignItems="center"
             spacing={3}
             >
@@ -41,7 +41,7 @@ las siguientes propiedades:
 */
 Forecats.propTypes = {
     forecastItemList: PropTypes.arrayOf(PropTypes.shape({
-        weekday: PropTypes.string.isRequired,
+        weekDay: PropTypes.string.isRequired,
         hour: PropTypes.number.isRequired,
         state: PropTypes.oneOf(["cloud", "cloudy", "fog", "sunny", "rain"]).isRequired,
         temperature: PropTypes.number.isRequired

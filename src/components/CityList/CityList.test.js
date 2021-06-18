@@ -13,7 +13,7 @@ describe('Renderizacion del componente CityList', () => {
 
         const {findAllByRole} = render(<CityList cities={cities}/>)
 
-        const items = await findAllByRole('listitem');
+        const items = await findAllByRole('button');
         expect(items).toHaveLength(3);
 
 
@@ -28,7 +28,7 @@ describe('Renderizacion del componente CityList', () => {
 
         const {findAllByRole} = render(<CityList cities={cities} onClickCity={fnClickOnItem}/>)
 
-        const items = await findAllByRole('listitem');
+        const items = await findAllByRole('button');
 
         //Ahora, para somilar la acción, vamos a utilizar fireEvent
         //fireEvent es parte de la libreria testing library

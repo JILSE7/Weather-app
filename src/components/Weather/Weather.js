@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Typography} from '@material-ui/core'
+import {Grid, Typography} from '@material-ui/core'
 import IconState from '../IconState'
 import { IconContext } from 'react-icons'
 
@@ -13,12 +13,12 @@ import { IconContext } from 'react-icons'
 const Weather = ({temperature, weather}) => {
     
     return (
-        <>
-        <IconContext.Provider value= {{size: '3em'}}>
+        <Grid container item direction="row" justify="center" alignContent="center" spacing={1}>
+        <IconContext.Provider value= {{size: '5em'}}>
             <IconState state={weather}/>
         </IconContext.Provider>
-         <Typography display="inline" variant="h3">{temperature}</Typography>
-        </>
+         <Typography display="inline" variant="h2">{temperature}</Typography>
+        </Grid>
     )
 }
 

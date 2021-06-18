@@ -13,7 +13,7 @@ describe('Test sobre Forecast', () => {
 
         const ids = await findAllByTestId('forecast-item');
 
-        expect(ids).toHaveLength(7);
+        expect(ids).toHaveLength(5);
     })
     
 })
