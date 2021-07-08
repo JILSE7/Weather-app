@@ -6,7 +6,7 @@ import ForecastItem from './ForecastItem';
 describe('Test sobre ForecastItem', () => {
     
     test('Renderizado del ForeCastItem ', async() => {
-        const {findByText} = render(<ForecastItem weekDay="Martes" hour={20} state="sunny" temperature={70} />)
+        const {findByText} = render(<ForecastItem weekDay="Martes" hour={20} state="clouds" temperature={70} />)
 
         const weekDay = await findByText(/Martes/);
         const hour = await findByText(/20/);

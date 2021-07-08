@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+
 
 import AppFrame from '../components/AppFrame';
 import { Grid } from '@material-ui/core'
@@ -18,7 +18,7 @@ const City = props => {
 
     //Weather
     const temperature = '20';
-    const weather = 'cloudy';
+    const weather = 'clouds';
 
     //WeatherInfo
     const humidity = 40;
@@ -48,8 +48,6 @@ const City = props => {
     )
 }
 
-City.propTypes = {
 
-}
 
 export default City

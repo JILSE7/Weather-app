@@ -11,10 +11,10 @@ describe('Renderizacion del componente CityList', () => {
     test('CityListRender ', async() => {
         //AAA ARRANGE: ARREGLAR LAS COSAS, ACT: ACTUAR, ASSERT: COMPARAR
 
-        const {findAllByRole} = render(<CityList cities={cities}/>)
+        const {findAllByRole} = render(<CityList cities={cities} onClickCity={ () => {}}/>)
 
         const items = await findAllByRole('button');
-        expect(items).toHaveLength(3);
+        expect(items).toHaveLength(4);
 
 
     });

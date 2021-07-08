@@ -10,7 +10,7 @@ describe('Testig al componente prueba', () => {
     //AAA Arrange Act Assert
     test('Weather Render ', async() => {
         
-        const {findByRole} =  render(<Weather temperature = "10" weather="sunny"/>);
+        const {findByRole} =  render(<Weather temperature = {10} weather="clouds"/>);
 
         const tem = await findByRole('heading');
 

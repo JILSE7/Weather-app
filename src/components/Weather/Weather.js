@@ -23,8 +23,8 @@ const Weather = ({temperature, weather}) => {
 }
 
 Weather.propTypes = {
-    temperature: PropTypes.string.isRequired,
-    weather: PropTypes.oneOf(["cloud", "cloudy", "fog", "sunny", "rain"]).isRequired,
+    temperature: PropTypes.number.isRequired,
+    weather: PropTypes.oneOf(["clear", "clouds", "snow", "drizzle", "rain", "thunderstorm", "fog"]).isRequired
     
 }
 

@@ -43,7 +43,7 @@ Forecats.propTypes = {
     forecastItemList: PropTypes.arrayOf(PropTypes.shape({
         weekDay: PropTypes.string.isRequired,
         hour: PropTypes.number.isRequired,
-        state: PropTypes.oneOf(["cloud", "cloudy", "fog", "sunny", "rain"]).isRequired,
+        state: PropTypes.oneOf(["clear", "clouds", "snow", "drizzle", "rain", "thunderstorm", "fog"]).isRequired,
         temperature: PropTypes.number.isRequired
     })).isRequired
 }

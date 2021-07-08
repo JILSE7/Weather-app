@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {Paper} from '@material-ui/core'
 import CityList from '../components/CityList';
 //Components
@@ -18,8 +17,5 @@ const Main = ({history}) => {
     )
 }
 
-Main.propTypes = {
-
-}
 
 export default Main

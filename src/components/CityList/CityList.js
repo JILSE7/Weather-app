@@ -7,7 +7,7 @@ import {List, ListItem} from '@material-ui/core'
 
 //axios
 import axios from 'axios';
-import { asyncify } from 'async';
+
 
 
 //renderCityAndCountry se va a convertir en una funcion que retorna otra funcion
@@ -35,15 +35,17 @@ const renderCityAndCountry = eventoOnClick =>  (cityandcountry, weather) =>{
         )
 }
 const CityList = ({cities, onClickCity}) => {
+    
     const [allweather, setAllweather] = useState({});
+    
     console.log(allweather);
     useEffect(() => {
-        const getWeather = (city, country) =>{
-                    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cd64f4eb49f4e8de11eb5a1729cd49b3`)
+        const getWeather = (city, country, countryCode) =>{
+                    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}, ${countryCode}&appid=d65500d1eac223e1ff9e9839574a0f06 `)
                                 .then(({data}) => {
                                     const temperature = data.main.temp;
                                     const propName = `${city} - ${country}`;
-                                    const state = "sunny";
+                                    const state = data.weather[0].main.toLowerCase();
                                     const propValue  = {temperature, state}
                                     setAllweather(allweather => ({...allweather , [propName] : propValue})) // al agregar allweather al setAllweather, lo que hace es que
                                     //directamente estamos haciendo referencia a su estado y ya no es necesario ponerlo en el arreglo de depencencias
@@ -53,19 +55,19 @@ const CityList = ({cities, onClickCity}) => {
                                 .catch(console.log)
         }
 
-        cities.forEach(({city, country}) => getWeather(city, country));
+        cities.forEach(({city, country, countryCode}) => getWeather(city, country, countryCode));
 
         
     }, [cities])
 
-    console.log(allweather);
+    
 
-    const weather = {temperature: 10, state: 'sunny'}
+    
     return (
         <List>
-            {
+          { 
                 cities.map((city,i) => renderCityAndCountry(onClickCity)(city, allweather[`${city.city} - ${city.country}`]))   
-            } 
+            }  
         </List>
     )
 }
@@ -73,7 +75,8 @@ const CityList = ({cities, onClickCity}) => {
 CityList.propTypes = {
     cities: PropTypes.arrayOf(PropTypes.shape({
         city: PropTypes.string,
-        country:  PropTypes.string
+        country:  PropTypes.string,
+        countryCode: PropTypes.string
     })).isRequired, //ptar
     onClickCity:PropTypes.func.isRequired,//ptfr
 }

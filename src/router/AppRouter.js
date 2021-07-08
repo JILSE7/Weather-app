@@ -1,10 +1,8 @@
 import React from 'react'
-import { Grid } from '@material-ui/core';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect
   } from "react-router-dom";
 import City from '../pages/City';
 import Main from '../pages/Main';
