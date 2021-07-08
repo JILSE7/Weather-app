@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {Link} from 'react-router-dom'
+import AppFrame from '../components/AppFrame';
 import { Grid } from '@material-ui/core'
 import CityInfo from '../components/CityInfo'
 import Weather from '../components/Weather'
@@ -26,6 +26,7 @@ const City = props => {
 
 
     return (
+        <AppFrame>
        <Grid container justify="center" spacing={2} alignItems="center">
            <Grid container item justify="center" alignItems="flex-end" xs={12} sm={11} md={10} lg={8}>
                <CityInfo city={city} country={country}/>
@@ -43,6 +44,7 @@ const City = props => {
             </Grid>
 
        </Grid>
+       </AppFrame>
     )
 }
 

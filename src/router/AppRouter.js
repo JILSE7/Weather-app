@@ -13,24 +13,17 @@ import Welcom from '../pages/Welcom';
 
 export const AppRouter = () => {
     return (
-        <Grid container justify="center" direction="row" >
 
-            <Grid item xs={12} sm={11} md={10} lg={8} >
-                <h1>Weather App React</h1>
                 <Router>    
                     <div>
                         <Switch>
                             <Route exact path="/main" component={Main}/>
                             <Route exact path="/city" component={City}/>
-                            <Route exact path="/welcome" component={Welcom}/>
+                            <Route exact path="/" component={Welcom}/>
                             <Route component={NotFound}/>
-                            <Redirect to="/notdound"/>
+                            
                         </Switch>
                     </div>
                 </Router>   
-
-            </Grid>
-
-        </Grid>
     )
 }

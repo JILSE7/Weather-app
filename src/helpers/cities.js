@@ -1,6 +1,6 @@
 //Cities
 export const cities = [
-    {city: 'CDMX', country: 'México'},
+    {city: 'Bogota', country: 'Colombia'},
     {city: 'Madrid', country: 'España'},
     {city: 'Buenos Aires', country: 'Argentina'}
   ]

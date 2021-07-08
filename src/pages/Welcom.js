@@ -1,15 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+
+import WelcomScreen  from '../components/WelcomeScreen'
+import {Grid, Typography, Link} from '@material-ui/core'
+
+import {IconContext} from 'react-icons';
+import {WiDaySunny} from 'react-icons/wi';
+
+import {Link as linq} from 'react-router-dom'
 
 const Welcom = props => {
     return (
-        <div>
-            <div>
-                <Link to="/main">Volver</Link>
-            </div>
-            <h1>Welcom Page</h1>
-        </div>
+        <WelcomScreen>
+            <Grid container direction="column" justify="center" className="full">
+                <div className="highligth">
+                        <Grid item container justify="center" alignItems="center">
+                                <Grid item>
+                                        <IconContext.Provider value={{size: "6em", color:"orange"}}>
+                                            <WiDaySunny/>
+                                        </IconContext.Provider>
+                                </Grid>
+                                <Grid item container direction="column" justify="center" alignItems="center">
+                                    <Typography variant="h4" color="inherit">
+                                    <span style={{color:"blue"}}>Weather App</span> 
+
+                                    </Typography>
+                                    <Link color="inherit" aria-label="menu" component={linq} to="/main">
+                                        Ingresar
+                                    </Link>
+                                </Grid>
+                        </Grid>
+                </div>
+            </Grid>
+        </WelcomScreen>
     )
 }
 
