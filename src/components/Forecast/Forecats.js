@@ -6,7 +6,7 @@ import ForecastItem from '../ForecastItem';
 //Funcion renderizadora
 const renderForecastItem = (forecast) => {
     const {weekDay, hour, state, temperature} = forecast;
-    console.log(weekDay);
+    
     return (
         <Grid data-testid="forecast-item" item key={`${weekDay}${hour}`}>
             <ForecastItem hour={hour} weekDay={weekDay} state={state} temperature={temperature}/>
@@ -20,11 +20,11 @@ const Forecats = ({forecastItemList}) => {
     return (
         <Grid
             container
-            justify="space-around"
+            justifyContent="space-around"
             alignItems="center"
             spacing={3}
             >
-                {
+                { forecastItemList &&
                     forecastItemList.map(forecast => (renderForecastItem(forecast)))
                 }
         </Grid>

@@ -31,7 +31,7 @@ const IconState = ({state}) => {
 }
 
 IconState.propTypes = {
-state: PropTypes.oneOf(["clear", "clouds", "snow", "drizzle", "rain", "thunderstorm, fog"]).isRequired
+state: PropTypes.oneOf(["clear", "clouds", "snow", "drizzle", "rain", "thunderstorm", "fog"]).isRequired
 }
 
 export default IconState

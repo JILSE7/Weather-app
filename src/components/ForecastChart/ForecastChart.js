@@ -5,7 +5,7 @@ import {Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Responsiv
 
 
 const ForecastChart = ({data}) => {
-    console.log(data);
+        console.log(data);
     return (
         <ResponsiveContainer height={250} width={"95%"}> 
             <LineChart
@@ -17,7 +17,7 @@ const ForecastChart = ({data}) => {
                     <Tooltip/>
                     <Legend/>
                     <CartesianGrid></CartesianGrid>
-                    <Line type="monotone" dataKey="min" stroke="#ffe100"></Line>
+                    <Line type="monotone" dataKey="min" stroke="#3f51b5"></Line>
                     <Line type="monotone" dataKey="máx" stroke="#ff3c00"></Line>
                 </LineChart>
         </ResponsiveContainer>

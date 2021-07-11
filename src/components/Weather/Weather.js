@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Grid, Typography} from '@material-ui/core'
+import Skeleton from '@material-ui/lab/Skeleton';
 import IconState from '../IconState'
 import { IconContext } from 'react-icons'
 
@@ -13,18 +14,26 @@ import { IconContext } from 'react-icons'
 const Weather = ({temperature, weather}) => {
     
     return (
-        <Grid container item direction="row" justify="center" alignContent="center" spacing={1}>
+        <Grid container item direction="row" justifyContent="center" alignContent="center" spacing={1}>
         <IconContext.Provider value= {{size: '5em'}}>
-            <IconState state={weather}/>
+            {   weather ? 
+                (<IconState state={weather}/>) 
+                                :
+                    (<Skeleton variant="circle" height={80} width={80} animation="wave" ></Skeleton>)
+                }
         </IconContext.Provider>
-         <Typography display="inline" variant="h2">{temperature}</Typography>
+         {  temperature ? 
+             (<Typography display="inline" variant="h2">{temperature}</Typography>)
+                                        :
+            (<Skeleton variant="rect" height={80} width={80} animation="pulse" ></Skeleton>)
+             }
         </Grid>
     )
 }
 
 Weather.propTypes = {
-    temperature: PropTypes.number.isRequired,
-    weather: PropTypes.oneOf(["clear", "clouds", "snow", "drizzle", "rain", "thunderstorm", "fog"]).isRequired
+    temperature: PropTypes.string,
+    weather: PropTypes.oneOf(["clear", "clouds", "snow", "drizzle", "rain", "thunderstorm", "fog"])
     
 }
 

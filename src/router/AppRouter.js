@@ -16,7 +16,7 @@ export const AppRouter = () => {
                     <div>
                         <Switch>
                             <Route exact path="/main" component={Main}/>
-                            <Route exact path="/city" component={City}/>
+                            <Route exact path="/city/:countryCode/:city" component={City}/>
                             <Route exact path="/" component={Welcom}/>
                             <Route component={NotFound}/>
                             
