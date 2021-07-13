@@ -5,3 +5,6 @@ export const cities = [
     {city: 'Buenos Aires', country: 'Argentina', countryCode: 'AR'},
     {city: 'Ciudad de México', country: 'México', countryCode: 'MX' },
   ]
+
+
+  export const getCountryName = (code) =>  cities.filter(c => c.countryCode === code)[0].country;

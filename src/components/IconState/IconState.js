@@ -8,7 +8,8 @@ import {
     WiSnow,
     WiRaindrop,
     WiThunderstorm,
-    WiFog
+    WiFog,
+    WiDayHaze
 
 } from 'react-icons/wi';
 
@@ -20,7 +21,9 @@ export const stateByName = {
     snow: WiSnow,
     drizzle: WiRaindrop,
     thunderstorm : WiThunderstorm,
-    fog: WiFog
+    fog: WiFog,
+    haze: WiDayHaze,
+    mist: WiDayHaze
 };
 
 const IconState = ({state}) => {
@@ -31,7 +34,7 @@ const IconState = ({state}) => {
 }
 
 IconState.propTypes = {
-state: PropTypes.oneOf(["clear", "clouds", "snow", "drizzle", "rain", "thunderstorm", "fog"]).isRequired
+state: PropTypes.oneOf(["clear", "clouds", "snow", "drizzle", "rain", "thunderstorm", "fog","haze", "mist"]).isRequired
 }
 
 export default IconState
