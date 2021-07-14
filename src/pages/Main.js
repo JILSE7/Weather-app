@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 //params
 
 
-const Main = ({ allweather, onsetAllweather}) => {
+const Main = ({ data, actions}) => {
     const history = useHistory();
     const handleClick = (city, countryCode) =>  {
         history.push(`/city/${countryCode}/${city}`); 
@@ -18,7 +18,7 @@ const Main = ({ allweather, onsetAllweather}) => {
     return (
         <AppFrame>   
             <Paper elevation={5}>
-                < CityList onClickCity={handleClick} cities={cities} allweather={allweather} onsetAllweather={onsetAllweather}/>
+                < CityList onClickCity={handleClick} cities={cities} data={data} actions={actions}/>
             </Paper>
         </AppFrame>
     )

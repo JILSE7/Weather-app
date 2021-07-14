@@ -16,14 +16,19 @@ import { getCityCode } from '../helpers/geocity';
 import { getCountryName } from '../helpers/cities';
 //import ProgressBar from '../components/ProgressBar'
 
-const City = ({allweather,onsetAllweather}) => {
-
-    const [dataForecast, forecastItemList, city, countryCode] = useCityPage();
+const City = ({data, actions}) => {
+  
+    const { onSetDataForecast,OnSetForecastItemList} = actions;
+    const {  allDataForecast, allForecastItemList} = data;
+    const [ city, countryCode] = useCityPage( allDataForecast, allForecastItemList,onSetDataForecast,OnSetForecastItemList);
     
             //useCityList(onsetAllweather, allweather);
     
-    console.log(allweather);
-    const weather2 = allweather[getCityCode(city, countryCode)]
+    const cityCode = getCityCode(city, countryCode)
+    const weather2 = data.allweather[cityCode];
+
+    const  dataForecast = allDataForecast[cityCode];
+    const forecastItemList = allForecastItemList[cityCode];
     console.log(weather2);
     
     //CityLIst

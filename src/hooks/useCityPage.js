@@ -6,10 +6,11 @@ import axios from 'axios';
 import { getUrl } from '../helpers/getUrl';
 import getDataAuxCityPage from '../helpers/getDataAuxCityPage';
 import getListForecastCityPage from '../helpers/getListForecastCityPage';
+import { getCityCode } from '../helpers/geocity';
 
-const useCityPage = () => {
-    const [dataForecast, setDataForecast] = useState(null);
-    const [forecastItemList, setForecastItemList] = useState(null);
+const useCityPage = ( allDataForecast, allForecastItemList,onSetDataForecast,OnSetForecastItemList) => {
+  /*   const [dataForecast, setDataForecast] = useState(null);
+    const [forecastItemList, setForecastItemList] = useState(null); */
     const {city, countryCode} = useParams();
     
     useDebugValue(`Estoy en mi customHook y puedo mostrar informacion para retroalimentar al programador ${city}`);
@@ -17,27 +18,34 @@ const useCityPage = () => {
     const url = getUrl('forecast',city, countryCode);
         
         const getForecast = async() => {
+            const cityCode = getCityCode(city, countryCode);
             try {
                 
                 const {data} = await axios.get(url);
                 const dataAux = getDataAuxCityPage(data); //helper for dataAux
-                setDataForecast(dataAux);
+                onSetDataForecast({[cityCode] : dataAux});
 
                 const listForecatsItemAux = getListForecastCityPage(data);//helper fot ListForecastItemAux
                 console.log(listForecatsItemAux);
-                setForecastItemList(listForecatsItemAux)
+                OnSetForecastItemList({[cityCode] : listForecatsItemAux});
             } catch (error) {
                 console.log(error);
             }
         }
         
-        getForecast();  
+        //Condicionando la peticion al servidor
+        const cityCode = getCityCode(city, countryCode);
+        if(allDataForecast && allForecastItemList && !allDataForecast[cityCode] && !allForecastItemList[cityCode]){
+
+            getForecast();  
+        }
         
         
         
-    }, [city, countryCode]);
+    }, [city, countryCode,onSetDataForecast,OnSetForecastItemList, allDataForecast, allForecastItemList]);
     
-    return [dataForecast, forecastItemList, city, countryCode] 
+    //return [dataForecast, forecastItemList, city, countryCode] 
+    return [city, countryCode] 
 }
 
 export default useCityPage;
