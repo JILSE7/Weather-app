@@ -55,4 +55,6 @@ WelcomeScreen.propTypes = {
     children: PropTypes.node,
 }
 
+//hola
+
 export default WelcomeScreen
