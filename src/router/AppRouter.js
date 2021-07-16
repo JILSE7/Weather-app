@@ -15,17 +15,7 @@ export const AppRouter = () => {
     const [allForecastItemList, setForecastItemList] = useState({}); 
 
 
-    /* const onsetAllweather = (weatherCity) => {
-        setAllweather(allweather =>  ({ ...allweather, ...weatherCity})) 
-    } */
-    
-    /* const onsetAllweather = useMemo(() => (
-        (weatherCity) => {
-            setAllweather( allweather =>  ({ ...allweather, ...weatherCity})) 
-            
-        }
-        ), [setAllweather]) */
-
+        //Memorizando funciones para evitar renderizaciones inecesarias
         const onSetDataForecast = useCallback((foreCastData) => {
                 setDataForecast(dataForecast => ({...dataForecast, ...foreCastData}))
         },[setDataForecast]);
@@ -38,7 +28,7 @@ export const AppRouter = () => {
             setAllweather( allweather =>  ({ ...allweather, ...weatherCity})) 
         }, [setAllweather]);
 
-
+        //Memorizando datos para evitar renderizaciones inecesarias
         const actions = useMemo(() => (
             {
                 onsetAllweather,
