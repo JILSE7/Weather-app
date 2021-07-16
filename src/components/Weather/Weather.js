@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import {Grid, Typography} from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -12,10 +12,10 @@ import { IconContext } from 'react-icons'
     return <Icon/>
 } */
 const Weather = ({temperature, weather}) => {
-    
+    const IconSize = useMemo(() => ({size: '5em'}), []);
     return (
         <Grid container item direction="row" justifyContent="center" alignContent="center" spacing={1}>
-        <IconContext.Provider value= {{size: '5em'}}>
+        <IconContext.Provider value= {IconSize}>
             {   weather ? 
                 (<IconState state={weather}/>) 
                                 :

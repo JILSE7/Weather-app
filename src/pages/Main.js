@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import {Paper} from '@material-ui/core'
 import CityList from '../components/CityList';
 
@@ -12,9 +12,11 @@ import { useHistory } from 'react-router-dom';
 
 const Main = ({ data, actions}) => {
     const history = useHistory();
-    const handleClick = (city, countryCode) =>  {
+     const handleClick = useCallback((city, countryCode) =>  {
         history.push(`/city/${countryCode}/${city}`); 
-    }
+    },[history]); 
+
+    
     return (
         <AppFrame>   
             <Paper elevation={5}>

@@ -7,11 +7,11 @@ import { getUrl } from "../helpers/getUrl";
 import getAllWeather from "../helpers/getAllWeather";
 import { getCityCode } from "../helpers/geocity";
 
-const useCityList = (onsetAllweather, allweather) => {
+const   useCityList = (actions, allweather) => {
     //const [allweather, setAllweather] = useState({}); //SUBIENDO EL ESTADO    
     const [error, setError] = useState(null);
     
-console.log(onsetAllweather);
+
     
     
     useEffect(() => {
@@ -20,14 +20,15 @@ console.log(onsetAllweather);
                 //Encarando el principio. no detener el flujo de datos, asi no quitamos las propiedades necesarias en el array de dependencias
                 const propName = getCityCode(city, countryCode);
 
-                onsetAllweather({[propName] : {}});
+                //onsetAllweather({[propName] : {}});
+                actions({type: 'SET_ALL_WEATHER', payload:{[propName] : {}} });
 
                 const url = getUrl('weather',city,countryCode)            
                 const {data} = await axios.get(url);
                 
                             // .then(({data}) => {
                                 const getAllWeatherAux = getAllWeather(data, city, countryCode); //helper
-                                console.log(getAllWeatherAux);
+                                
                                 //SUBIENDO EL ESTADO
                                 //setAllweather(allweather => ({...allweather , ...getAllWeatherAux})) // al agregar allweather al setAllweather, lo que hace es que
                                 //directamente estamos haciendo referencia a su estado y ya no es necesario ponerlo en el arreglo de depencencias
@@ -36,7 +37,8 @@ console.log(onsetAllweather);
                             //})
                         
                             //onsetAllweather({...allweather , ...getAllWeatherAux});
-                            onsetAllweather(getAllWeatherAux);
+                            //onsetAllweather(getAllWeatherAux);
+                            actions({type: 'SET_ALL_WEATHER', payload: getAllWeatherAux });
 
             } catch (error) {
                 
@@ -67,7 +69,7 @@ console.log(onsetAllweather);
             );
 
         
-    }, [ onsetAllweather, allweather]);
+    }, [ actions, allweather]);
 
     return [ error, setError]
 }

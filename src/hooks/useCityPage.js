@@ -8,7 +8,7 @@ import getDataAuxCityPage from '../helpers/getDataAuxCityPage';
 import getListForecastCityPage from '../helpers/getListForecastCityPage';
 import { getCityCode } from '../helpers/geocity';
 
-const useCityPage = ( allDataForecast, allForecastItemList,onSetDataForecast,OnSetForecastItemList) => {
+const useCityPage = ( allDataForecast, allForecastItemList,actions) => {
   /*   const [dataForecast, setDataForecast] = useState(null);
     const [forecastItemList, setForecastItemList] = useState(null); */
     const {city, countryCode} = useParams();
@@ -23,11 +23,14 @@ const useCityPage = ( allDataForecast, allForecastItemList,onSetDataForecast,OnS
                 
                 const {data} = await axios.get(url);
                 const dataAux = getDataAuxCityPage(data); //helper for dataAux
-                onSetDataForecast({[cityCode] : dataAux});
+                    //console.log(dataAux);
+                //onSetDataForecast({[cityCode] : dataAux}); //remplazo por actions
+                actions({type : 'SET_DATA_FORECAST', payload: {[cityCode] : dataAux}})
 
                 const listForecatsItemAux = getListForecastCityPage(data);//helper fot ListForecastItemAux
-                console.log(listForecatsItemAux);
-                OnSetForecastItemList({[cityCode] : listForecatsItemAux});
+                
+                //OnSetForecastItemList({[cityCode] : listForecatsItemAux});
+                actions({type: 'SET_DATA_FORE_ITEM_LIST', payload: {[cityCode] : listForecatsItemAux}})
             } catch (error) {
                 console.log(error);
             }
@@ -42,7 +45,7 @@ const useCityPage = ( allDataForecast, allForecastItemList,onSetDataForecast,OnS
         
         
         
-    }, [city, countryCode,onSetDataForecast,OnSetForecastItemList, allDataForecast, allForecastItemList]);
+    }, [city, countryCode,actions, allDataForecast, allForecastItemList]);
     
     //return [dataForecast, forecastItemList, city, countryCode] 
     return [city, countryCode] 
