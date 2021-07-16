@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react'
+import { useReducer } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -9,53 +10,59 @@ import Main from '../pages/Main';
 import { NotFound } from '../pages/NotFound';
 import Welcom from '../pages/Welcom';
 
+//TYPES
+import {types} from '../helpers/types'
+//Context
+import WeatherProvider from '../context';
+
+const initialState = {
+    allweather : {},
+    allDataForecast : {},
+    allForecastItemList : {}
+};
 export const AppRouter = () => {
-    const [allweather, setAllweather] = useState({}); 
-    const [allDataForecast, setDataForecast] = useState({});
-    const [allForecastItemList, setForecastItemList] = useState({}); 
+    
+    
+    //Reducer
+    //action {type : 'Nombre de la accion', payload: 'carga que alterara al estado'} 
+    const reducer = useCallback((state, action) => {
+        switch (action.type) {
+            case types.setAllWather:
+                const weatherCity = action.payload;
+                const newAllWeather = { ...state.allweather, ...weatherCity}; //nuevo estado
 
+                return {...state, allweather : newAllWeather} //agregando al state general
 
-        //Memorizando funciones para evitar renderizaciones inecesarias
-        const onSetDataForecast = useCallback((foreCastData) => {
-                setDataForecast(dataForecast => ({...dataForecast, ...foreCastData}))
-        },[setDataForecast]);
+            case types.setDataForecast:
+                const foreCastData = action.payload;
+                const newAllDataForecast = {...state.allDataForecast, ...foreCastData};//nuevo state
 
-        const onSetForecastItemList = useCallback((forecastItemListCity) => {
-            setForecastItemList(forecastItemList => ({...forecastItemListCity, ...forecastItemList}))
-    },[setForecastItemList])
+                return {...state, allDataForecast : newAllDataForecast};
+            case types.setDataForecastItemLIst:
+                const  forecastItemList  = action.payload;
+                const newAllForecastItemLIst = {...state.allForecastItemList, ...forecastItemList};
+                return {...state, allForecastItemList : newAllForecastItemLIst};
+            
+            default:
+                return state;
+        }
+    },[]); //solo una vez
 
-        const onsetAllweather = useCallback( (weatherCity) => {
-            setAllweather( allweather =>  ({ ...allweather, ...weatherCity})) 
-        }, [setAllweather]);
-
-        //Memorizando datos para evitar renderizaciones inecesarias
-        const actions = useMemo(() => (
-            {
-                onsetAllweather,
-                onSetDataForecast,
-                onSetForecastItemList
-            }
-        ),[onsetAllweather]);
-
-        const data = useMemo(() => (
-            {
-                allweather,
-                allDataForecast,
-                allForecastItemList
-            }
-        ), [allweather, allDataForecast, allForecastItemList]);
 
     
-    return (
+    const [state, dispatch] = useReducer(reducer,initialState); //react nos asegura que no generara distintas instancias, por eso aqui ya no se ocupa usememo
 
+
+    return (
+                <WeatherProvider stateContext={state}  DispatchContext={dispatch}>
                 <Router>    
                     <div>
                         <Switch>
                             <Route exact path="/main">
-                                <Main  actions={actions} data={data}/>
+                                <Main  actions={dispatch} data={state}/>
                             </Route>
                             <Route exact path="/city/:countryCode/:city" >
-                                <City  data={data} actions = {actions} />
+                                <City  data={state} actions = {dispatch} />
                             </Route>
                             <Route exact path="/" component={Welcom}/>
                             <Route component={NotFound}/>
@@ -63,5 +70,6 @@ export const AppRouter = () => {
                         </Switch>
                     </div>
                 </Router>   
+                </WeatherProvider>
     )
 }

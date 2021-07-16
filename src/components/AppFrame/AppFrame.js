@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types';
 import {IconContext} from 'react-icons';
 import {WiDaySunny} from 'react-icons/wi';
@@ -7,13 +7,14 @@ import {Grid, AppBar, Toolbar, IconButton,Link, Typography} from '@material-ui/c
 import {Link as LinkRouter} from 'react-router-dom'
 
 const AppFrame = ({children}) => {
+    const IconSize = useMemo(() => ({size: "2em"}), []);
     return (
         <Grid  container justifyContent="center">
                 <AppBar position="static">
                         <Toolbar variant="dense">
                                 <IconButton color="inherit" aria-label="menu">
                                     <Link component={LinkRouter} to ="/main" color="inherit" aria-label="menu">
-                                        <IconContext.Provider value={{size: "2em"}}>
+                                        <IconContext.Provider value={IconSize}>
                                             <WiDaySunny/>
                                             
                                         </IconContext.Provider>

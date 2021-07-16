@@ -1,2 +1,2 @@
 
-export const getUrl = (type,city, countryCode) => `https://api.openweathermap.org/data/2.5/${type}?q=${city},${countryCode}&appid=d65500d1eac223e1ff9e9839574a0f06`;
+export const getUrl = (type,city, countryCode) => `https://api.openweathermap.org/data/2.5/${type}?q=${city},${countryCode}&appid=823dee69d4da95742d6df214be11bfb2`;

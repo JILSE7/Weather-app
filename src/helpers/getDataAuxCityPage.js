@@ -17,7 +17,7 @@ const getDataAuxCityPage = (data) => {
             
         });
 
-        console.log(tempArray, day.format('ddd'));
+        //console.log(tempArray, day.format('ddd'));
         const temps = tempArray.map(item => item.main.temp)
 
         //const ultimo = temps.length - 1

@@ -18,9 +18,9 @@ import { getCountryName } from '../helpers/cities';
 
 const City = ({data, actions}) => {
   
-    const { onSetDataForecast,OnSetForecastItemList} = actions;
+    //const { onSetDataForecast,OnSetForecastItemList} = actions;
     const {  allDataForecast, allForecastItemList} = data;
-    const [ city, countryCode] = useCityPage( allDataForecast, allForecastItemList,onSetDataForecast,OnSetForecastItemList);
+    const [ city, countryCode] = useCityPage( allDataForecast, allForecastItemList,actions);
     
             //useCityList(onsetAllweather, allweather);
     
@@ -29,7 +29,7 @@ const City = ({data, actions}) => {
 
     const  dataForecast = allDataForecast[cityCode];
     const forecastItemList = allForecastItemList[cityCode];
-    console.log(weather2);
+    //console.log(weather2);
     
     //CityLIst
     //const city = 'CDMX';

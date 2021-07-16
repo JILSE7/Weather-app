@@ -1,45 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import CityInfo from '../CityInfo';
-import Weather from '../Weather';
-import Grid from '@material-ui/core/Grid';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import {List, ListItem} from '@material-ui/core'
 
 import useCityList from '../../hooks/useCityList';
 import { getCityCode } from '../../helpers/geocity';
+import CitylistItem from '../CityListItem/CitylistItem';
+
+
+
 
 
 //renderCityAndCountry se va a convertir en una funcion que retorna otra funcion
 const renderCityAndCountry = eventoOnClick =>  (cityandcountry, weather) =>{
-    const {city, country} = cityandcountry;
+    const {city} = cityandcountry;
     //const {temperature, state} = weather;
     return (
-        <ListItem button key = {city} onClick={eventoOnClick}>
-            <Grid  container item xs={12} justifyContent="center" alignItems="center">
-
-                <Grid item xs={12}sm={8} >
-                    <CityInfo city ={city} country={country} />
-
-                </Grid>
-                
-             
-                <Grid  item xs={12} md={3} container  justifyContent="center">
-                    
-                        <Weather temperature={weather && weather.temperature} weather={weather && weather.state}/>
-                </Grid>
-
-
-            </Grid>
-        </ListItem>   
+                <CitylistItem  key = {city}  {...cityandcountry} eventoOnClick ={eventoOnClick} weather={weather}/>
         )
     }
-    const CityList = ({cities, onClickCity, actions,data}) => {
+    const CityList = memo(({cities, onClickCity, actions,data}) => {
         
         const   { allweather } = data
-        const {onsetAllweather} = actions
+        
+        //const {onsetAllweather} = actions
             
-        const [ error, setError] = useCityList(onsetAllweather, allweather);
+        const [ error, setError] = useCityList(actions, allweather);
         
     return (
         <>
@@ -53,7 +39,9 @@ const renderCityAndCountry = eventoOnClick =>  (cityandcountry, weather) =>{
         </List>
         </>
     )
-}
+});
+
+CitylistItem.displayName = 'PUTOOO'
 
 /* CityList.propTypes = {
     cities: PropTypes.arrayOf(PropTypes.shape({
