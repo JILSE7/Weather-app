@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import AppFrame from '../components/AppFrame';
 import { Grid } from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress'
@@ -14,13 +14,23 @@ import useCityList from '../hooks/useCityList'
 import CircularStatic from '../components/CircularProgressWithLabel';
 import { getCityCode } from '../helpers/geocity';
 import { getCountryName } from '../helpers/cities';
-//import ProgressBar from '../components/ProgressBar'
 
-const City = ({data, actions}) => {
-  
+//context
+import {WeatherStateContext, WeatherDispatchContext} from '../context/WeatherContext'
+import { useWeather} from '../hooks/useWeather';
+
+const City = () => {
+    
+    //Context  HOC
+    //const data = useContext(WeatherStateContext);
+    //const actions = useContext(WeatherDispatchContext);
+       const  [data, dispatch] = useWeather();
+       
+
+
     //const { onSetDataForecast,OnSetForecastItemList} = actions;
     const {  allDataForecast, allForecastItemList} = data;
-    const [ city, countryCode] = useCityPage( allDataForecast, allForecastItemList,actions);
+    const [ city, countryCode] = useCityPage( allDataForecast, allForecastItemList,dispatch);
     
             //useCityList(onsetAllweather, allweather);
     

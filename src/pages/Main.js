@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 //params
 
 
-const Main = ({ data, actions}) => {
+const Main = () => {
     const history = useHistory();
      const handleClick = useCallback((city, countryCode) =>  {
         history.push(`/city/${countryCode}/${city}`); 
@@ -20,7 +20,7 @@ const Main = ({ data, actions}) => {
     return (
         <AppFrame>   
             <Paper elevation={5}>
-                < CityList onClickCity={handleClick} cities={cities} data={data} actions={actions}/>
+                < CityList onClickCity={handleClick} cities={cities} />
             </Paper>
         </AppFrame>
     )

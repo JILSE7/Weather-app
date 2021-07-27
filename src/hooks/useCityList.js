@@ -7,7 +7,7 @@ import { getUrl } from "../helpers/getUrl";
 import getAllWeather from "../helpers/getAllWeather";
 import { getCityCode } from "../helpers/geocity";
 
-const   useCityList = (actions, allweather) => {
+const   useCityList = (dispatch, allweather) => {
     //const [allweather, setAllweather] = useState({}); //SUBIENDO EL ESTADO    
     const [error, setError] = useState(null);
     
@@ -21,7 +21,7 @@ const   useCityList = (actions, allweather) => {
                 const propName = getCityCode(city, countryCode);
 
                 //onsetAllweather({[propName] : {}});
-                actions({type: 'SET_ALL_WEATHER', payload:{[propName] : {}} });
+                dispatch({type: 'SET_ALL_WEATHER', payload:{[propName] : {}} });
 
                 const url = getUrl('weather',city,countryCode)            
                 const {data} = await axios.get(url);
@@ -38,7 +38,7 @@ const   useCityList = (actions, allweather) => {
                         
                             //onsetAllweather({...allweather , ...getAllWeatherAux});
                             //onsetAllweather(getAllWeatherAux);
-                            actions({type: 'SET_ALL_WEATHER', payload: getAllWeatherAux });
+                            dispatch({type: 'SET_ALL_WEATHER', payload: getAllWeatherAux });
 
             } catch (error) {
                 
@@ -69,7 +69,7 @@ const   useCityList = (actions, allweather) => {
             );
 
         
-    }, [ actions, allweather]);
+    }, [ dispatch, allweather]);
 
     return [ error, setError]
 }

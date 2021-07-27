@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import {List, ListItem} from '@material-ui/core'
@@ -6,6 +6,10 @@ import {List, ListItem} from '@material-ui/core'
 import useCityList from '../../hooks/useCityList';
 import { getCityCode } from '../../helpers/geocity';
 import CitylistItem from '../CityListItem/CitylistItem';
+
+//context
+import {WeatherStateContext, WeatherDispatchContext} from '../../context/WeatherContext'
+import { useWeather } from '../../hooks/useWeather';
 
 
 
@@ -19,13 +23,15 @@ const renderCityAndCountry = eventoOnClick =>  (cityandcountry, weather) =>{
                 <CitylistItem  key = {city}  {...cityandcountry} eventoOnClick ={eventoOnClick} weather={weather}/>
         )
     }
-    const CityList = memo(({cities, onClickCity, actions,data}) => {
+    const CityList = memo(({cities, onClickCity}) => {
+        //Context  HOC
+        /* const {allweather} = useContext(WeatherStateContext);
+        const actions = useContext(WeatherDispatchContext); */
+        const [{allweather}, dispatch] =  useWeather(); //UNA SOLA LINEA
+
         
-        const   { allweather } = data
-        
-        //const {onsetAllweather} = actions
             
-        const [ error, setError] = useCityList(actions, allweather);
+        const [ error, setError] = useCityList(dispatch, allweather);
         
     return (
         <>

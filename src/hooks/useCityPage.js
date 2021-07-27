@@ -8,7 +8,7 @@ import getDataAuxCityPage from '../helpers/getDataAuxCityPage';
 import getListForecastCityPage from '../helpers/getListForecastCityPage';
 import { getCityCode } from '../helpers/geocity';
 
-const useCityPage = ( allDataForecast, allForecastItemList,actions) => {
+const useCityPage = ( allDataForecast, allForecastItemList,dispatch) => {
   /*   const [dataForecast, setDataForecast] = useState(null);
     const [forecastItemList, setForecastItemList] = useState(null); */
     const {city, countryCode} = useParams();
@@ -25,12 +25,12 @@ const useCityPage = ( allDataForecast, allForecastItemList,actions) => {
                 const dataAux = getDataAuxCityPage(data); //helper for dataAux
                     //console.log(dataAux);
                 //onSetDataForecast({[cityCode] : dataAux}); //remplazo por actions
-                actions({type : 'SET_DATA_FORECAST', payload: {[cityCode] : dataAux}})
+                dispatch({type : 'SET_DATA_FORECAST', payload: {[cityCode] : dataAux}})
 
                 const listForecatsItemAux = getListForecastCityPage(data);//helper fot ListForecastItemAux
                 
                 //OnSetForecastItemList({[cityCode] : listForecatsItemAux});
-                actions({type: 'SET_DATA_FORE_ITEM_LIST', payload: {[cityCode] : listForecatsItemAux}})
+                dispatch({type: 'SET_DATA_FORE_ITEM_LIST', payload: {[cityCode] : listForecatsItemAux}})
             } catch (error) {
                 console.log(error);
             }
@@ -45,7 +45,7 @@ const useCityPage = ( allDataForecast, allForecastItemList,actions) => {
         
         
         
-    }, [city, countryCode,actions, allDataForecast, allForecastItemList]);
+    }, [city, countryCode,dispatch, allDataForecast, allForecastItemList]);
     
     //return [dataForecast, forecastItemList, city, countryCode] 
     return [city, countryCode] 
