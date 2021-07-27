@@ -1,70 +1,18 @@
-# Getting Started with Create React App
+#Weather App (REACT-CONTEXT-API)
+ESTA APLICACION SE HIZO CON LA FINALIDAD DE PROFUNDIZAR EN TEMAS EN ESPECIFICO DE REACT COMO LO SON:
+1)Memo
+2)UseMemo
+3)useCallback
+5)Custom Hooks
+4)Peticiones controladas al servidor
+5)Mejora de rendimiento de una aplicacion
+6)Refactorizaciones
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Como tambien utilizar herramientas de front-end como lo es StoryBook
 
-## Available Scripts
+Para el funcionamiento ocupamos la api de OpenWeather
+![openweather](data:image/png;base64,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)
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Puedes probarla, la tenemos en gh-pages
+espero que la disfrutes.
+https://jilse7.github.io/Weather-app-React/
